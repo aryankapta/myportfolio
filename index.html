@@ -221,10 +221,10 @@
         .hero-img-wrapper {
             width: 380px; height: 380px;
             border-radius: 50%;
-            border: 3px solid var(--gold);
+            border: none;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 0 60px var(--glow), 0 0 120px rgba(201, 168, 76, 0.05);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         .hero-img-wrapper img {
             width: 100%; height: 100%; object-fit: cover;
@@ -390,82 +390,86 @@
         #experience { background: var(--bg-secondary); }
         .exp-track {
             position: relative;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
-        /* Vertical glowing line */
+        /* Center timeline line */
         .exp-track::before {
             content: '';
             position: absolute;
-            left: 28px;
+            left: 50%;
+            transform: translateX(-50%);
             top: 0; bottom: 0;
-            width: 3px;
+            width: 2px;
             background: linear-gradient(to bottom, var(--gold), var(--gold-dark), transparent);
-            border-radius: 3px;
         }
         .exp-card {
             display: flex;
-            gap: 0;
-            margin-bottom: 32px;
+            margin-bottom: 48px;
             position: relative;
-            padding-left: 70px;
+            width: 50%;
         }
-        /* Animated dot on the line */
+        /* Alternating sides */
+        .exp-card:nth-child(odd) {
+            padding-right: 50px;
+            justify-content: flex-end;
+            text-align: right;
+        }
+        .exp-card:nth-child(even) {
+            padding-left: 50px;
+            margin-left: 50%;
+        }
+        /* Center dot */
         .exp-card .exp-dot {
             position: absolute;
-            left: 18px; top: 28px;
-            width: 24px; height: 24px;
+            top: 24px;
+            width: 16px; height: 16px;
             border-radius: 50%;
             background: var(--bg-primary);
             border: 3px solid var(--gold);
             z-index: 2;
-            display: flex; align-items: center; justify-content: center;
         }
-        .exp-card .exp-dot::after {
-            content: '';
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--gold);
-        }
+        .exp-card:nth-child(odd) .exp-dot { right: -8px; }
+        .exp-card:nth-child(even) .exp-dot { left: -8px; }
         .exp-card.current .exp-dot {
             background: var(--gold);
+            width: 20px; height: 20px;
             box-shadow: 0 0 20px var(--glow), 0 0 40px rgba(230, 57, 70, 0.1);
             animation: exp-pulse 2s infinite;
         }
-        .exp-card.current .exp-dot::after {
-            background: #fff;
-        }
+        .exp-card.current:nth-child(odd) .exp-dot { right: -10px; }
+        .exp-card.current:nth-child(even) .exp-dot { left: -10px; }
         @keyframes exp-pulse {
             0%, 100% { box-shadow: 0 0 20px var(--glow); }
             50% { box-shadow: 0 0 30px var(--glow), 0 0 60px rgba(230, 57, 70, 0.15); }
         }
+        /* Large step number */
+        .exp-step {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 800;
+            color: rgba(230, 57, 70, 0.07);
+            line-height: 1;
+            position: absolute;
+            top: -10px;
+        }
+        .exp-card:nth-child(odd) .exp-step { left: 0; }
+        .exp-card:nth-child(even) .exp-step { right: 0; }
         /* The card body */
         .exp-body {
-            flex: 1;
             background: var(--card-gradient);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 28px 32px;
+            padding: 28px 28px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
-        .exp-body::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 4px; height: 100%;
-            background: linear-gradient(to bottom, var(--gold), transparent);
-            border-radius: 20px 0 0 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
         .exp-card:hover .exp-body {
             border-color: var(--gold);
-            transform: translateX(8px);
-            box-shadow: 0 12px 40px var(--glow);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px var(--glow);
         }
-        .exp-card:hover .exp-body::before { opacity: 1; }
         /* Top row: role + badge */
         .exp-top {
             display: flex;
@@ -475,6 +479,7 @@
             flex-wrap: wrap;
             gap: 8px;
         }
+        .exp-card:nth-child(odd) .exp-top { justify-content: flex-end; }
         .exp-role {
             font-size: 19px; font-weight: 800;
             font-family: 'Playfair Display', serif;
@@ -491,12 +496,14 @@
             font-weight: 700; margin-bottom: 10px;
             display: flex; align-items: center; gap: 6px;
         }
+        .exp-card:nth-child(odd) .exp-company { justify-content: flex-end; }
         .exp-company .venue-icon { font-size: 18px; }
         /* Meta row: date + duration + location */
         .exp-meta {
             display: flex; flex-wrap: wrap; gap: 10px;
             align-items: center;
         }
+        .exp-card:nth-child(odd) .exp-meta { justify-content: flex-end; }
         .exp-meta .meta-chip {
             display: inline-flex; align-items: center; gap: 5px;
             padding: 5px 14px; border-radius: 50px;
@@ -518,10 +525,28 @@
             color: var(--text-secondary);
         }
 
-        @media (max-width: 640px) {
-            .exp-card { padding-left: 55px; }
+        @media (max-width: 768px) {
             .exp-track::before { left: 20px; }
-            .exp-card .exp-dot { left: 10px; }
+            .exp-card,
+            .exp-card:nth-child(odd),
+            .exp-card:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding-left: 50px;
+                padding-right: 0;
+                text-align: left;
+            }
+            .exp-card:nth-child(odd) .exp-top,
+            .exp-card:nth-child(odd) .exp-company,
+            .exp-card:nth-child(odd) .exp-meta { justify-content: flex-start; }
+            .exp-card .exp-dot,
+            .exp-card:nth-child(odd) .exp-dot,
+            .exp-card:nth-child(even) .exp-dot,
+            .exp-card.current:nth-child(odd) .exp-dot,
+            .exp-card.current:nth-child(even) .exp-dot {
+                left: 12px; right: auto;
+            }
+            .exp-step { display: none; }
             .exp-body { padding: 22px 20px; }
             .exp-role { font-size: 16px; }
             .exp-meta { gap: 6px; }
@@ -990,13 +1015,14 @@
             <p>From assistant bartender to leading the bar at prestigious venues</p>
         </div>
         <div class="exp-track">
-            <!-- Current -->
+            <!-- Current - LEFT -->
             <div class="exp-card current">
+                <span class="exp-step">01</span>
                 <div class="exp-dot"></div>
                 <div class="exp-body">
                     <div class="exp-top">
-                        <span class="exp-role">Bartender</span>
                         <span class="exp-current">&#9889; Current Role</span>
+                        <span class="exp-role">Bartender</span>
                     </div>
                     <div class="exp-company"><span class="venue-icon">&#127976;</span> Ramee Group of Hotels</div>
                     <div class="exp-meta">
@@ -1005,8 +1031,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Lalit -->
+            <!-- Lalit - RIGHT -->
             <div class="exp-card">
+                <span class="exp-step">02</span>
                 <div class="exp-dot"></div>
                 <div class="exp-body">
                     <div class="exp-top">
@@ -1020,8 +1047,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Thalassa -->
+            <!-- Thalassa - LEFT -->
             <div class="exp-card">
+                <span class="exp-step">03</span>
                 <div class="exp-dot"></div>
                 <div class="exp-body">
                     <div class="exp-top">
@@ -1035,8 +1063,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Romeo Lane -->
+            <!-- Romeo Lane - RIGHT -->
             <div class="exp-card">
+                <span class="exp-step">04</span>
                 <div class="exp-dot"></div>
                 <div class="exp-body">
                     <div class="exp-top">
@@ -1050,8 +1079,9 @@
                     </div>
                 </div>
             </div>
-            <!-- The Finch -->
+            <!-- The Finch - LEFT -->
             <div class="exp-card">
+                <span class="exp-step">05</span>
                 <div class="exp-dot"></div>
                 <div class="exp-body">
                     <div class="exp-top">
