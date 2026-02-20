@@ -564,81 +564,73 @@
 
         /* ===== CONTACT SECTION ===== */
         #contact { background: var(--bg-secondary); }
-        .contact-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 50px; align-items: start;
+        .contact-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .contact-left h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px; font-weight: 700;
-            margin-bottom: 8px;
+        /* Top: quick links row */
+        .contact-quick {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
         }
-        .contact-left > p {
-            font-size: 15px; color: var(--text-secondary);
-            line-height: 1.8; margin-bottom: 32px;
-        }
-        .contact-links { display: flex; flex-direction: column; gap: 14px; }
-        .contact-link {
-            display: flex; align-items: center; gap: 14px;
-            padding: 16px 20px;
-            background: var(--card-gradient);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+        .cq-item {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 12px;
             text-decoration: none; color: var(--text-primary);
             transition: all 0.3s;
+            cursor: pointer;
         }
-        .contact-link:hover {
+        .cq-item:hover { transform: translateY(-6px); }
+        .cq-item:hover .cq-circle {
             border-color: var(--gold);
-            transform: translateX(6px);
-            box-shadow: 0 8px 30px var(--glow);
+            box-shadow: 0 0 30px var(--glow);
         }
-        .contact-link .cl-icon {
-            width: 44px; height: 44px;
-            border-radius: 12px;
+        .cq-circle {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
             display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
+            font-size: 28px;
+            transition: all 0.3s;
         }
-        .cl-icon.email-ic { background: rgba(230, 57, 70, 0.15); }
-        .cl-icon.phone-ic { background: rgba(230, 57, 70, 0.12); }
-        .cl-icon.linkedin-ic { background: rgba(10, 102, 194, 0.15); }
-        .contact-link .cl-text h4 {
+        .cq-label {
             font-size: 13px; font-weight: 700;
-            margin-bottom: 1px;
+            color: var(--text-primary);
         }
-        .contact-link .cl-text p {
+        .cq-value {
             font-size: 12px; color: var(--text-secondary);
+            margin-top: -6px;
         }
-        .contact-link .cl-arrow {
-            margin-left: auto; font-size: 16px;
-            color: var(--text-muted);
-            transition: color 0.3s, transform 0.3s;
-        }
-        .contact-link:hover .cl-arrow { color: var(--gold); transform: translateX(4px); }
-
-        /* Contact Form */
-        .contact-form-card {
+        /* Bottom: form area */
+        .contact-form-area {
             background: var(--card-gradient);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: 24px;
+            padding: 48px;
             position: relative;
             overflow: hidden;
         }
-        .contact-form-card::before {
+        .contact-form-area::before {
             content: '';
             position: absolute; top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--gold), var(--copper), var(--gold));
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
-        .contact-form-card h3 {
+        .cfa-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .cfa-header h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 22px; font-weight: 700;
-            margin-bottom: 6px;
+            font-size: 26px; font-weight: 700;
+            margin-bottom: 8px;
         }
-        .contact-form-card > p {
-            font-size: 13px; color: var(--text-secondary);
-            margin-bottom: 28px;
+        .cfa-header p {
+            font-size: 14px; color: var(--text-secondary);
         }
         .form-group {
             margin-bottom: 20px;
@@ -673,7 +665,7 @@
         }
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 130px;
         }
         .form-row {
             display: grid; grid-template-columns: 1fr 1fr;
@@ -683,17 +675,18 @@
             width: 100%;
             padding: 16px 32px;
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: #0a0a0f;
-            border: none; border-radius: 12px;
+            color: #fff;
+            border: none; border-radius: 50px;
             font-family: 'Inter', sans-serif;
             font-size: 15px; font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            letter-spacing: 0.5px;
         }
         .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--glow);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px var(--glow);
         }
         .form-submit:disabled {
             opacity: 0.6; cursor: not-allowed; transform: none;
@@ -703,6 +696,7 @@
             border-radius: 12px;
             font-size: 13px; font-weight: 600;
             display: none; align-items: center; gap: 8px;
+            justify-content: center;
         }
         .form-status.success {
             display: flex;
@@ -717,6 +711,13 @@
             color: #ff6b6b;
         }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        @media (max-width: 640px) {
+            .contact-quick { gap: 24px; }
+            .cq-circle { width: 58px; height: 58px; font-size: 24px; }
+            .contact-form-area { padding: 28px 20px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
 
         /* ===== FOOTER ===== */
         footer {
@@ -753,8 +754,7 @@
             .hero-image { order: -1; }
             .hero-img-wrapper { width: 280px; height: 280px; }
             .hero-text h1 { font-size: 42px; }
-            .about-grid, .contact-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
             .float-badge { display: none; }
         }
 
@@ -1106,49 +1106,39 @@
         <div class="section-header">
             <div class="tag">Get In Touch</div>
             <h2>Let's Mix Something Great</h2>
+            <p>Professional bartender and mixologist. Open to exciting opportunities worldwide.</p>
         </div>
-        <div class="contact-grid">
-            <div class="contact-left">
-                <h3>Get In Touch</h3>
-                <p>Professional bartender and mixologist. Open to exciting opportunities worldwide. Let's connect.</p>
-                <div class="contact-links">
-                    <a href="mailto:aryankapta33@gmail.com" class="contact-link">
-                        <div class="cl-icon email-ic">&#9993;&#65039;</div>
-                        <div class="cl-text">
-                            <h4>Email</h4>
-                            <p>aryankapta33@gmail.com</p>
-                        </div>
-                        <span class="cl-arrow">&#8594;</span>
-                    </a>
-                    <a href="tel:+918894138882" class="contact-link">
-                        <div class="cl-icon phone-ic">&#128222;</div>
-                        <div class="cl-text">
-                            <h4>Phone</h4>
-                            <p>+91 8894138882</p>
-                        </div>
-                        <span class="cl-arrow">&#8594;</span>
-                    </a>
-                    <a href="https://linkedin.com/in/aryan_kapta" target="_blank" class="contact-link">
-                        <div class="cl-icon linkedin-ic">&#128101;</div>
-                        <div class="cl-text">
-                            <h4>LinkedIn</h4>
-                            <p>linkedin.com/in/aryan_kapta</p>
-                        </div>
-                        <span class="cl-arrow">&#8594;</span>
-                    </a>
-                </div>
+        <div class="contact-wrapper">
+            <!-- Quick contact circles -->
+            <div class="contact-quick">
+                <a href="mailto:aryankapta33@gmail.com" class="cq-item">
+                    <div class="cq-circle">&#9993;&#65039;</div>
+                    <span class="cq-label">Email</span>
+                    <span class="cq-value">aryankapta33@gmail.com</span>
+                </a>
+                <a href="tel:+918894138882" class="cq-item">
+                    <div class="cq-circle">&#128222;</div>
+                    <span class="cq-label">Phone</span>
+                    <span class="cq-value">+91 8894138882</span>
+                </a>
+                <a href="https://linkedin.com/in/aryan_kapta" target="_blank" class="cq-item">
+                    <div class="cq-circle">&#128101;</div>
+                    <span class="cq-label">LinkedIn</span>
+                    <span class="cq-value">aryan_kapta</span>
+                </a>
             </div>
-            <div class="contact-form-card">
-                <h3>&#127864; Send Me a Message</h3>
-                <p>Fill out the form below and I'll get back to you as soon as possible.</p>
+            <!-- Message form -->
+            <div class="contact-form-area">
+                <div class="cfa-header">
+                    <h3>&#127864; Send Me a Message</h3>
+                    <p>Have an opportunity or question? Drop me a message and I'll get back to you.</p>
+                </div>
                 <form id="contactForm" action="https://formsubmit.co/aryankapta33@gmail.com" method="POST">
-                    <!-- FormSubmit config -->
                     <input type="hidden" name="_subject" value="New message from your Bartender Portfolio!">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
                     <input type="text" name="_honey" style="display:none">
                     <input type="hidden" name="_next" value="https://aryankapta-bartender.netlify.app/#contact">
-
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Your Name</label>
@@ -1266,7 +1256,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.skill-card, .cocktail-card, .stat-card, .exp-body, .contact-link, .contact-form-card').forEach(el => {
+document.querySelectorAll('.skill-card, .cocktail-card, .stat-card, .exp-body, .cq-item, .contact-form-area').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, box-shadow 0.3s';
