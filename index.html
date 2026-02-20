@@ -386,69 +386,6 @@
             transition: width 1.5s ease;
         }
 
-        /* ===== PHOTO BREAK SECTION ===== */
-        .photo-break {
-            position: relative;
-            z-index: 1;
-            padding: 0;
-            height: 500px;
-            overflow: hidden;
-        }
-        .photo-break-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            display: block;
-            filter: brightness(0.7);
-        }
-        .photo-break-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(
-                to bottom,
-                var(--bg-primary) 0%,
-                transparent 15%,
-                transparent 85%,
-                var(--bg-secondary) 100%
-            );
-            pointer-events: none;
-        }
-        /* Second photo break - cocktail image */
-        .photo-break.cocktail-break .photo-break-img {
-            object-position: center center;
-            filter: brightness(0.75) saturate(1.1);
-        }
-        .photo-break-caption {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 2;
-        }
-        .photo-break-caption span {
-            display: inline-block;
-            padding: 10px 28px;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(230, 57, 70, 0.4);
-            border-radius: 50px;
-            color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-        @media (max-width: 968px) {
-            .photo-break { height: 400px; }
-        }
-        @media (max-width: 640px) {
-            .photo-break { height: 320px; }
-            .photo-break-caption span { font-size: 14px; padding: 8px 20px; }
-        }
-
         /* ===== EXPERIENCE SECTION ===== */
         #experience { background: var(--bg-secondary); }
         .exp-track {
@@ -1052,12 +989,6 @@
     </div>
 </section>
 
-<!-- Photo Break Section -->
-<div class="photo-break">
-    <img src="aryan.jpeg" alt="Aryan Kapta - Professional Bartender" class="photo-break-img">
-    <div class="photo-break-overlay"></div>
-</div>
-
 <!-- Experience Section -->
 <section id="experience">
     <div class="section-inner">
@@ -1145,15 +1076,6 @@
         </div>
     </div>
 </section>
-
-<!-- Cocktail Photo Break -->
-<div class="photo-break cocktail-break">
-    <img src="122233.jpeg" alt="Beachside Cocktail Craft" class="photo-break-img">
-    <div class="photo-break-overlay"></div>
-    <div class="photo-break-caption">
-        <span>&#127864; Where Craft Meets Paradise</span>
-    </div>
-</div>
 
 <!-- Signature Cocktails Section -->
 <section id="cocktails">
