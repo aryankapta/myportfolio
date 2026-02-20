@@ -389,67 +389,144 @@
 
         /* ===== EXPERIENCE SECTION ===== */
         #experience { background: var(--bg-secondary); }
-        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-        .timeline::before {
-            content: ''; position: absolute;
-            left: 50%; transform: translateX(-50%);
-            width: 2px; height: 100%;
-            background: linear-gradient(to bottom, var(--gold), var(--border));
+        .exp-track {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .timeline-item {
-            display: flex; align-items: flex-start;
-            margin-bottom: 40px; position: relative;
+        /* Vertical glowing line */
+        .exp-track::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold), var(--gold-dark), transparent);
+            border-radius: 3px;
         }
-        .timeline-item:nth-child(odd) { flex-direction: row-reverse; }
-        .timeline-item:nth-child(odd) .tl-content { text-align: right; margin-left: 0; margin-right: 50px; }
-        .timeline-item:nth-child(even) .tl-content { margin-left: 50px; }
-        .tl-dot {
-            position: absolute; left: 50%;
-            transform: translateX(-50%);
-            width: 16px; height: 16px;
-            background: var(--gold);
+        .exp-card {
+            display: flex;
+            gap: 0;
+            margin-bottom: 32px;
+            position: relative;
+            padding-left: 70px;
+        }
+        /* Animated dot on the line */
+        .exp-card .exp-dot {
+            position: absolute;
+            left: 18px; top: 28px;
+            width: 24px; height: 24px;
             border-radius: 50%;
-            border: 3px solid var(--bg-primary);
+            background: var(--bg-primary);
+            border: 3px solid var(--gold);
             z-index: 2;
-            box-shadow: 0 0 15px var(--glow);
+            display: flex; align-items: center; justify-content: center;
         }
-        .tl-content {
-            width: calc(50% - 50px);
+        .exp-card .exp-dot::after {
+            content: '';
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+        .exp-card.current .exp-dot {
+            background: var(--gold);
+            box-shadow: 0 0 20px var(--glow), 0 0 40px rgba(230, 57, 70, 0.1);
+            animation: exp-pulse 2s infinite;
+        }
+        .exp-card.current .exp-dot::after {
+            background: #fff;
+        }
+        @keyframes exp-pulse {
+            0%, 100% { box-shadow: 0 0 20px var(--glow); }
+            50% { box-shadow: 0 0 30px var(--glow), 0 0 60px rgba(230, 57, 70, 0.15); }
+        }
+        /* The card body */
+        .exp-body {
+            flex: 1;
             background: var(--card-gradient);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            transition: all 0.3s;
+            border-radius: 20px;
+            padding: 28px 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .tl-content:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 8px 30px var(--glow); }
-        .tl-content .role {
-            font-size: 18px; font-weight: 700;
-            margin-bottom: 4px;
+        .exp-body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            border-radius: 20px 0 0 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .tl-content .company {
-            font-size: 15px; color: var(--gold);
-            font-weight: 600; margin-bottom: 4px;
+        .exp-card:hover .exp-body {
+            border-color: var(--gold);
+            transform: translateX(8px);
+            box-shadow: 0 12px 40px var(--glow);
         }
-        .tl-content .duration {
-            font-size: 12px; color: var(--text-muted);
+        .exp-card:hover .exp-body::before { opacity: 1; }
+        /* Top row: role + badge */
+        .exp-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .exp-role {
+            font-size: 19px; font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+        .exp-current {
+            padding: 5px 14px; border-radius: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: #fff; font-size: 11px; font-weight: 700;
             text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 12px;
+            animation: exp-pulse 2s infinite;
         }
-        .tl-content .location-tag {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 4px 12px; border-radius: 20px;
-            background: rgba(230, 57, 70, 0.1);
-            border: 1px solid rgba(230, 57, 70, 0.2);
-            font-size: 11px; color: var(--gold);
-            font-weight: 500;
+        .exp-company {
+            font-size: 16px; color: var(--gold);
+            font-weight: 700; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 6px;
         }
-        .current-badge {
-            display: inline-block;
-            padding: 3px 10px; border-radius: 20px;
-            background: rgba(76, 201, 100, 0.15);
-            border: 1px solid rgba(76, 201, 100, 0.3);
-            color: #4cc964; font-size: 11px; font-weight: 600;
-            margin-left: 8px;
+        .exp-company .venue-icon { font-size: 18px; }
+        /* Meta row: date + duration + location */
+        .exp-meta {
+            display: flex; flex-wrap: wrap; gap: 10px;
+            align-items: center;
+        }
+        .exp-meta .meta-chip {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 14px; border-radius: 50px;
+            font-size: 12px; font-weight: 600;
+        }
+        .meta-chip.date {
+            background: rgba(230, 57, 70, 0.08);
+            border: 1px solid rgba(230, 57, 70, 0.15);
+            color: var(--gold);
+        }
+        .meta-chip.dur {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        .meta-chip.loc {
+            background: rgba(230, 57, 70, 0.06);
+            border: 1px solid rgba(230, 57, 70, 0.12);
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 640px) {
+            .exp-card { padding-left: 55px; }
+            .exp-track::before { left: 20px; }
+            .exp-card .exp-dot { left: 10px; }
+            .exp-body { padding: 22px 20px; }
+            .exp-role { font-size: 16px; }
+            .exp-meta { gap: 6px; }
+            .meta-chip { font-size: 11px !important; padding: 4px 10px !important; }
         }
 
         /* ===== SIGNATURE COCKTAILS ===== */
@@ -680,13 +757,6 @@
             .about-grid, .contact-grid { grid-template-columns: 1fr; }
             .form-row { grid-template-columns: 1fr; }
             .float-badge { display: none; }
-            .timeline::before { left: 20px; }
-            .timeline-item, .timeline-item:nth-child(odd) { flex-direction: column; }
-            .timeline-item:nth-child(odd) .tl-content,
-            .timeline-item:nth-child(even) .tl-content {
-                width: 100%; margin-left: 50px; margin-right: 0; text-align: left;
-            }
-            .tl-dot { left: 20px; }
         }
 
         @media (max-width: 640px) {
@@ -896,55 +966,80 @@
             <h2>My Journey Behind the Bar</h2>
             <p>From assistant bartender to leading the bar at prestigious venues</p>
         </div>
-        <div class="timeline">
+        <div class="exp-track">
             <!-- Current -->
-            <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                    <div class="role">Bartender <span class="current-badge">&#9989; Current</span></div>
-                    <div class="company">Ramee Group of Hotels</div>
-                    <div class="duration">Oct 2025 - Present</div>
-                    <span class="location-tag">&#127758; Dubai, UAE</span>
+            <div class="exp-card current">
+                <div class="exp-dot"></div>
+                <div class="exp-body">
+                    <div class="exp-top">
+                        <span class="exp-role">Bartender</span>
+                        <span class="exp-current">&#9889; Current Role</span>
+                    </div>
+                    <div class="exp-company"><span class="venue-icon">&#127976;</span> Ramee Group of Hotels</div>
+                    <div class="exp-meta">
+                        <span class="meta-chip date">&#128197; Oct 2025 &ndash; Present</span>
+                        <span class="meta-chip loc">&#127758; Dubai, UAE</span>
+                    </div>
                 </div>
             </div>
             <!-- Lalit -->
-            <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                    <div class="role">Bartender</div>
-                    <div class="company">The Lalit Grand Palace</div>
-                    <div class="duration">1 Year 7 Months</div>
-                    <span class="location-tag">&#127759; Srinagar, India</span>
+            <div class="exp-card">
+                <div class="exp-dot"></div>
+                <div class="exp-body">
+                    <div class="exp-top">
+                        <span class="exp-role">Bartender</span>
+                    </div>
+                    <div class="exp-company"><span class="venue-icon">&#127984;</span> The Lalit Grand Palace</div>
+                    <div class="exp-meta">
+                        <span class="meta-chip date">&#128197; Oct 2023 &ndash; Jun 2025</span>
+                        <span class="meta-chip dur">&#9202; 1 Year 7 Months</span>
+                        <span class="meta-chip loc">&#127759; Srinagar, India</span>
+                    </div>
                 </div>
             </div>
             <!-- Thalassa -->
-            <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                    <div class="role">Bartender</div>
-                    <div class="company">Thalassa Greek Tavern</div>
-                    <div class="duration">10 Months</div>
-                    <span class="location-tag">&#127758; Goa, India</span>
+            <div class="exp-card">
+                <div class="exp-dot"></div>
+                <div class="exp-body">
+                    <div class="exp-top">
+                        <span class="exp-role">Bartender</span>
+                    </div>
+                    <div class="exp-company"><span class="venue-icon">&#127860;</span> Thalassa Greek Tavern</div>
+                    <div class="exp-meta">
+                        <span class="meta-chip date">&#128197; Sep 2022 &ndash; Aug 2023</span>
+                        <span class="meta-chip dur">&#9202; 10 Months</span>
+                        <span class="meta-chip loc">&#127758; Goa, India</span>
+                    </div>
                 </div>
             </div>
             <!-- Romeo Lane -->
-            <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                    <div class="role">Bartender / Assistant Bartender</div>
-                    <div class="company">Romeo Lane, Vagator</div>
-                    <div class="duration">11 Months</div>
-                    <span class="location-tag">&#127758; Goa, India</span>
+            <div class="exp-card">
+                <div class="exp-dot"></div>
+                <div class="exp-body">
+                    <div class="exp-top">
+                        <span class="exp-role">Bartender / Assistant Bartender</span>
+                    </div>
+                    <div class="exp-company"><span class="venue-icon">&#127865;</span> Romeo Lane, Vagator</div>
+                    <div class="exp-meta">
+                        <span class="meta-chip date">&#128197; Nov 2021 &ndash; Aug 2022</span>
+                        <span class="meta-chip dur">&#9202; 11 Months</span>
+                        <span class="meta-chip loc">&#127758; Goa, India</span>
+                    </div>
                 </div>
             </div>
             <!-- The Finch -->
-            <div class="timeline-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                    <div class="role">Assistant Bartender</div>
-                    <div class="company">The Finch</div>
-                    <div class="duration">11 Months</div>
-                    <span class="location-tag">&#127759; Chandigarh, India</span>
+            <div class="exp-card">
+                <div class="exp-dot"></div>
+                <div class="exp-body">
+                    <div class="exp-top">
+                        <span class="exp-role">Assistant Bartender</span>
+                    </div>
+                    <div class="exp-company"><span class="venue-icon">&#127866;</span> The Finch</div>
+                    <div class="exp-meta">
+                        <span class="meta-chip date">&#128197; Feb 2021 &ndash; Oct 2021</span>
+                        <span class="meta-chip dur">&#9202; 11 Months</span>
+                        <span class="meta-chip loc">&#127759; Chandigarh, India</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1180,7 +1275,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.skill-card, .cocktail-card, .stat-card, .tl-content, .contact-link, .contact-cta').forEach(el => {
+document.querySelectorAll('.skill-card, .cocktail-card, .stat-card, .exp-body, .contact-link, .contact-form-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, box-shadow 0.3s';
