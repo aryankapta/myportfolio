@@ -144,7 +144,6 @@
             display: flex; align-items: center; gap: 6px;
         }
         .theme-toggle:hover { border-color: var(--gold); transform: scale(1.05); }
-        .theme-label { font-size: 11px; color: var(--text-muted); font-weight: 500; }
 
         /* Mobile menu */
         .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
@@ -804,7 +803,6 @@
         <div style="display:flex;align-items:center;gap:12px;">
             <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">
                 <span id="themeIcon">&#9728;&#65039;</span>
-                <span class="theme-label" id="themeLabel">Light</span>
             </button>
             <button class="hamburger" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
@@ -886,11 +884,6 @@
                     <h3>Education</h3>
                     <p style="margin-top:12px;"><strong>Professional Bartending</strong><br>Institute of Bartending & Hotel Management<br>Shimla/Solan</p>
                     <p style="margin-top:16px;"><strong>Matriculation & High School</strong><br>Himachal Pradesh Board of Education</p>
-                </div>
-                <div class="skill-card" style="text-align:center;">
-                    <span style="font-size:60px;display:block;margin-bottom:16px;">&#127758;</span>
-                    <h3>Currently Based In</h3>
-                    <p style="margin-top:12px;"><strong>Dubai, UAE</strong><br>Ramee Group of Hotels</p>
                 </div>
             </div>
         </div>
@@ -1220,7 +1213,6 @@ function toggleTheme() {
     const next = current === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     document.getElementById('themeIcon').innerHTML = next === 'dark' ? '&#9728;&#65039;' : '&#127769;';
-    document.getElementById('themeLabel').textContent = next === 'dark' ? 'Light' : 'Dark';
     localStorage.setItem('theme', next);
 }
 
@@ -1230,7 +1222,6 @@ function toggleTheme() {
     if (saved) {
         document.documentElement.setAttribute('data-theme', saved);
         document.getElementById('themeIcon').innerHTML = saved === 'dark' ? '&#9728;&#65039;' : '&#127769;';
-        document.getElementById('themeLabel').textContent = saved === 'dark' ? 'Light' : 'Dark';
     }
 })();
 
