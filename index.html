@@ -724,21 +724,21 @@
             gap: 16px;
         }
         .form-submit {
-            width: 100%;
-            padding: 16px 32px;
+            width: auto;
+            padding: 12px 28px;
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             color: #fff;
             border: none; border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 15px; font-weight: 700;
+            font-size: 14px; font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
+            display: inline-flex; align-items: center; gap: 8px;
             letter-spacing: 0.5px;
         }
         .form-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px var(--glow);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow);
         }
         .form-submit:disabled {
             opacity: 0.6; cursor: not-allowed; transform: none;
@@ -773,6 +773,12 @@
             .form-row { grid-template-columns: 1fr; }
             .cq-circle { font-size: 20px; }
         }
+
+        /* SVG icon styles */
+        .svg-icon { display: inline-flex; align-items: center; justify-content: center; }
+        .svg-icon svg { width: 1em; height: 1em; }
+        .cq-circle .svg-icon svg { width: 24px; height: 24px; }
+        footer .footer-social .svg-icon svg { width: 20px; height: 20px; }
 
         /* ===== FOOTER ===== */
         footer {
@@ -1213,21 +1219,21 @@
                         <p>Feel free to reach out through any of the channels below. I'm always open to exciting opportunities and collaborations.</p>
                     </div>
                     <a href="mailto:aryankapta33@gmail.com" class="cq-item">
-                        <div class="cq-circle">&#9993;&#65039;</div>
+                        <div class="cq-circle"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" fill="#EA4335"/><path d="M2 7l10 6 10-6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></div>
                         <div class="cq-text">
                             <span class="cq-label">Email</span>
                             <span class="cq-value">aryankapta33@gmail.com</span>
                         </div>
                     </a>
                     <a href="tel:+918894138882" class="cq-item">
-                        <div class="cq-circle">&#128222;</div>
+                        <div class="cq-circle"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" fill="#34A853"/></svg></span></div>
                         <div class="cq-text">
                             <span class="cq-label">Phone</span>
                             <span class="cq-value">+91 8894138882</span>
                         </div>
                     </a>
                     <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" class="cq-item">
-                        <div class="cq-circle">&#128101;</div>
+                        <div class="cq-circle"><span class="svg-icon"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path d="M7.5 9.5v7M7.5 7a.5.5 0 110 1 .5.5 0 010-1zm3.5 9.5v-4.5c0-1.5 1-2.5 2.5-2.5s2 1 2 2.5v4.5M11 9.5v7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
                         <div class="cq-text">
                             <span class="cq-label">LinkedIn</span>
                             <span class="cq-value">Aryan Kapta</span>
@@ -1242,9 +1248,9 @@
 <!-- Footer -->
 <footer>
     <div class="footer-social">
-        <a href="mailto:aryankapta33@gmail.com" title="Email">&#9993;&#65039;</a>
-        <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" title="LinkedIn">&#128101;</a>
-        <a href="tel:+918894138882" title="Phone">&#128222;</a>
+        <a href="mailto:aryankapta33@gmail.com" title="Email"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" fill="#EA4335"/><path d="M2 7l10 6 10-6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span></a>
+        <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" title="LinkedIn"><span class="svg-icon"><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path d="M7.5 9.5v7M7.5 7a.5.5 0 110 1 .5.5 0 010-1zm3.5 9.5v-4.5c0-1.5 1-2.5 2.5-2.5s2 1 2 2.5v4.5M11 9.5v7" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <a href="tel:+918894138882" title="Phone"><span class="svg-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" fill="#34A853"/></svg></span></a>
     </div>
     <p>&copy; 2025 Aryan Kapta. Crafted with &#127864; and passion.</p>
 </footer>
