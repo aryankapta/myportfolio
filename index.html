@@ -386,6 +386,75 @@
             transition: width 1.5s ease;
         }
 
+        /* ===== PHOTO BREAK SECTION ===== */
+        .photo-break {
+            position: relative;
+            z-index: 1;
+            padding: 0;
+            height: 500px;
+            overflow: hidden;
+        }
+        .photo-break-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            filter: brightness(0.7);
+        }
+        .photo-break-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(
+                to bottom,
+                var(--bg-primary) 0%,
+                transparent 15%,
+                transparent 85%,
+                var(--bg-secondary) 100%
+            );
+            pointer-events: none;
+        }
+        .photo-break-text {
+            position: absolute;
+            bottom: 60px; left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 2;
+        }
+        .photo-break-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+            margin-bottom: 8px;
+        }
+        .photo-break-text p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .photo-break-line {
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 16px auto 0;
+            border-radius: 3px;
+        }
+        @media (max-width: 968px) {
+            .photo-break { height: 400px; }
+            .photo-break-text h3 { font-size: 28px; }
+        }
+        @media (max-width: 640px) {
+            .photo-break { height: 320px; }
+            .photo-break-text h3 { font-size: 22px; }
+            .photo-break-text p { font-size: 13px; letter-spacing: 2px; }
+            .photo-break-text { bottom: 40px; }
+        }
+
         /* ===== EXPERIENCE SECTION ===== */
         #experience { background: var(--bg-secondary); }
         .exp-track {
@@ -585,16 +654,15 @@
         }
         .cq-item:hover { transform: translateY(-6px); }
         .cq-item:hover .cq-circle {
-            border-color: var(--gold);
-            box-shadow: 0 0 30px var(--glow);
+            transform: scale(1.15);
         }
         .cq-circle {
             width: 70px; height: 70px;
             border-radius: 50%;
-            border: 2px solid var(--border);
-            background: var(--bg-card);
+            border: none;
+            background: none;
             display: flex; align-items: center; justify-content: center;
-            font-size: 28px;
+            font-size: 36px;
             transition: all 0.3s;
         }
         .cq-label {
@@ -714,7 +782,7 @@
 
         @media (max-width: 640px) {
             .contact-quick { gap: 24px; }
-            .cq-circle { width: 58px; height: 58px; font-size: 24px; }
+            .cq-circle { width: 58px; height: 58px; font-size: 30px; }
             .contact-form-area { padding: 28px 20px; }
             .form-row { grid-template-columns: 1fr; }
         }
@@ -942,7 +1010,7 @@
                 <div class="skill-bar"><div class="skill-bar-fill" style="width:93%"></div></div>
             </div>
             <div class="skill-card">
-                <span class="skill-icon">&#128166;</span>
+                <span class="skill-icon">&#129532;</span>
                 <h3>Hygiene & Safety Standards</h3>
                 <p>Strict adherence to food safety protocols, cleanliness, and responsible alcohol service.</p>
                 <div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div>
@@ -950,6 +1018,17 @@
         </div>
     </div>
 </section>
+
+<!-- Photo Break Section -->
+<div class="photo-break">
+    <img src="aryan.jpeg" alt="Aryan Kapta - Professional Bartender" class="photo-break-img">
+    <div class="photo-break-overlay"></div>
+    <div class="photo-break-text">
+        <h3>Passion in Every Pour</h3>
+        <p>Crafting Experiences Since 2021</p>
+        <div class="photo-break-line"></div>
+    </div>
+</div>
 
 <!-- Experience Section -->
 <section id="experience">
@@ -1121,10 +1200,10 @@
                     <span class="cq-label">Phone</span>
                     <span class="cq-value">+91 8894138882</span>
                 </a>
-                <a href="https://linkedin.com/in/aryan_kapta" target="_blank" class="cq-item">
+                <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" class="cq-item">
                     <div class="cq-circle">&#128101;</div>
                     <span class="cq-label">LinkedIn</span>
-                    <span class="cq-value">aryan_kapta</span>
+                    <span class="cq-value">Aryan Kapta</span>
                 </a>
             </div>
             <!-- Message form -->
@@ -1171,7 +1250,7 @@
 <footer>
     <div class="footer-social">
         <a href="mailto:aryankapta33@gmail.com" title="Email">&#9993;&#65039;</a>
-        <a href="https://linkedin.com/in/aryan_kapta" target="_blank" title="LinkedIn">&#128101;</a>
+        <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" title="LinkedIn">&#128101;</a>
         <a href="tel:+918894138882" title="Phone">&#128222;</a>
     </div>
     <p>&copy; 2025 Aryan Kapta. Crafted with &#127864; and passion.</p>
