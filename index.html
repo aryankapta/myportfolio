@@ -596,33 +596,26 @@
         .cq-item {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 14px;
             text-decoration: none;
             color: var(--text-primary);
             transition: all 0.3s;
             cursor: pointer;
-            padding: 14px 18px;
-            border-radius: 16px;
-            background: var(--card-gradient);
-            border: 1px solid var(--border);
+            padding: 6px 0;
+            background: none;
+            border: none;
         }
         .cq-item:hover {
-            border-color: var(--gold);
-            transform: translateX(6px);
-            box-shadow: 0 8px 30px var(--glow);
+            transform: translateX(4px);
+            color: var(--gold);
         }
         .cq-circle {
-            width: 48px; height: 48px;
-            border-radius: 12px;
-            background: rgba(230, 57, 70, 0.1);
-            border: none;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px;
-            transition: all 0.3s;
+            font-size: 24px;
             flex-shrink: 0;
+            transition: all 0.3s;
         }
         .cq-item:hover .cq-circle {
-            background: rgba(230, 57, 70, 0.2);
+            transform: scale(1.1);
         }
         .cq-text {
             display: flex;
@@ -753,8 +746,7 @@
         @media (max-width: 640px) {
             .contact-form-area { padding: 28px 20px; }
             .form-row { grid-template-columns: 1fr; }
-            .cq-item { padding: 12px 14px; }
-            .cq-circle { width: 42px; height: 42px; font-size: 18px; }
+            .cq-circle { font-size: 20px; }
         }
 
         /* ===== FOOTER ===== */
