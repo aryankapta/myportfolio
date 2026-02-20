@@ -414,45 +414,11 @@
             );
             pointer-events: none;
         }
-        .photo-break-text {
-            position: absolute;
-            bottom: 60px; left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 2;
-        }
-        .photo-break-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-            margin-bottom: 8px;
-        }
-        .photo-break-text p {
-            font-size: 16px;
-            color: rgba(255,255,255,0.85);
-            text-shadow: 0 1px 10px rgba(0,0,0,0.5);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-        .photo-break-line {
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-            margin: 16px auto 0;
-            border-radius: 3px;
-        }
         @media (max-width: 968px) {
             .photo-break { height: 400px; }
-            .photo-break-text h3 { font-size: 28px; }
         }
         @media (max-width: 640px) {
             .photo-break { height: 320px; }
-            .photo-break-text h3 { font-size: 22px; }
-            .photo-break-text p { font-size: 13px; letter-spacing: 2px; }
-            .photo-break-text { bottom: 40px; }
         }
 
         /* ===== EXPERIENCE SECTION ===== */
@@ -634,67 +600,102 @@
         /* ===== CONTACT SECTION ===== */
         #contact { background: var(--bg-secondary); }
         .contact-wrapper {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
         }
-        /* Top: quick links row */
-        .contact-quick {
-            display: flex;
-            justify-content: center;
+        /* Two-column layout: form left, info right */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
             gap: 40px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
+            align-items: start;
+        }
+        /* Right: contact info */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            padding: 40px 0 0;
+        }
+        .contact-info-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .contact-info-header p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
         }
         .cq-item {
-            display: flex; flex-direction: column;
-            align-items: center; gap: 12px;
-            text-decoration: none; color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
             transition: all 0.3s;
             cursor: pointer;
+            padding: 14px 18px;
+            border-radius: 16px;
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
         }
-        .cq-item:hover { transform: translateY(-6px); }
-        .cq-item:hover .cq-circle {
-            transform: scale(1.15);
+        .cq-item:hover {
+            border-color: var(--gold);
+            transform: translateX(6px);
+            box-shadow: 0 8px 30px var(--glow);
         }
         .cq-circle {
-            width: 70px; height: 70px;
-            border-radius: 50%;
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: rgba(230, 57, 70, 0.1);
             border: none;
-            background: none;
             display: flex; align-items: center; justify-content: center;
-            font-size: 36px;
+            font-size: 22px;
             transition: all 0.3s;
+            flex-shrink: 0;
+        }
+        .cq-item:hover .cq-circle {
+            background: rgba(230, 57, 70, 0.2);
+        }
+        .cq-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
         .cq-label {
-            font-size: 13px; font-weight: 700;
-            color: var(--text-primary);
+            font-size: 12px; font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .cq-value {
-            font-size: 12px; color: var(--text-secondary);
-            margin-top: -6px;
+            font-size: 14px; color: var(--text-primary);
+            font-weight: 500;
         }
-        /* Bottom: form area */
+        /* Left: form area */
         .contact-form-area {
             background: var(--card-gradient);
             border: 1px solid var(--border);
             border-radius: 24px;
-            padding: 48px;
+            padding: 40px;
             position: relative;
             overflow: hidden;
         }
         .contact-form-area::before {
             content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            position: absolute; top: 0; left: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            border-radius: 24px 0 0 24px;
         }
         .cfa-header {
-            text-align: center;
-            margin-bottom: 36px;
+            margin-bottom: 28px;
         }
         .cfa-header h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 26px; font-weight: 700;
+            font-size: 24px; font-weight: 700;
             margin-bottom: 8px;
         }
         .cfa-header p {
@@ -780,11 +781,15 @@
         }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
+        @media (max-width: 968px) {
+            .contact-layout { grid-template-columns: 1fr; }
+            .contact-info { padding-top: 0; }
+        }
         @media (max-width: 640px) {
-            .contact-quick { gap: 24px; }
-            .cq-circle { width: 58px; height: 58px; font-size: 30px; }
             .contact-form-area { padding: 28px 20px; }
             .form-row { grid-template-columns: 1fr; }
+            .cq-item { padding: 12px 14px; }
+            .cq-circle { width: 42px; height: 42px; font-size: 18px; }
         }
 
         /* ===== FOOTER ===== */
@@ -1023,11 +1028,6 @@
 <div class="photo-break">
     <img src="aryan.jpeg" alt="Aryan Kapta - Professional Bartender" class="photo-break-img">
     <div class="photo-break-overlay"></div>
-    <div class="photo-break-text">
-        <h3>Passion in Every Pour</h3>
-        <p>Crafting Experiences Since 2021</p>
-        <div class="photo-break-line"></div>
-    </div>
 </div>
 
 <!-- Experience Section -->
@@ -1188,59 +1188,71 @@
             <p>Professional bartender and mixologist. Open to exciting opportunities worldwide.</p>
         </div>
         <div class="contact-wrapper">
-            <!-- Quick contact circles -->
-            <div class="contact-quick">
-                <a href="mailto:aryankapta33@gmail.com" class="cq-item">
-                    <div class="cq-circle">&#9993;&#65039;</div>
-                    <span class="cq-label">Email</span>
-                    <span class="cq-value">aryankapta33@gmail.com</span>
-                </a>
-                <a href="tel:+918894138882" class="cq-item">
-                    <div class="cq-circle">&#128222;</div>
-                    <span class="cq-label">Phone</span>
-                    <span class="cq-value">+91 8894138882</span>
-                </a>
-                <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" class="cq-item">
-                    <div class="cq-circle">&#128101;</div>
-                    <span class="cq-label">LinkedIn</span>
-                    <span class="cq-value">Aryan Kapta</span>
-                </a>
-            </div>
-            <!-- Message form -->
-            <div class="contact-form-area">
-                <div class="cfa-header">
-                    <h3>&#127864; Send Me a Message</h3>
-                    <p>Have an opportunity or question? Drop me a message and I'll get back to you.</p>
+            <div class="contact-layout">
+                <!-- LEFT: Message form -->
+                <div class="contact-form-area">
+                    <div class="cfa-header">
+                        <h3>&#9993;&#65039; Send Me a Message</h3>
+                        <p>Have an opportunity or question? Drop me a message and I'll get back to you.</p>
+                    </div>
+                    <form id="contactForm" action="https://formsubmit.co/aryankapta33@gmail.com" method="POST">
+                        <input type="hidden" name="_subject" value="New message from your Bartender Portfolio!">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" name="_next" value="https://aryankapta-bartender.netlify.app/#contact">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Event Booking / Job Opportunity / Other">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell me about your event, venue, or opportunity..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit" id="submitBtn">
+                            <span id="btnText">&#9993;&#65039; Send Message</span>
+                        </button>
+                        <div class="form-status" id="formStatus"></div>
+                    </form>
                 </div>
-                <form id="contactForm" action="https://formsubmit.co/aryankapta33@gmail.com" method="POST">
-                    <input type="hidden" name="_subject" value="New message from your Bartender Portfolio!">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="text" name="_honey" style="display:none">
-                    <input type="hidden" name="_next" value="https://aryankapta-bartender.netlify.app/#contact">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                <!-- RIGHT: Contact info -->
+                <div class="contact-info">
+                    <div class="contact-info-header">
+                        <h3>Contact Information</h3>
+                        <p>Feel free to reach out through any of the channels below. I'm always open to exciting opportunities and collaborations.</p>
+                    </div>
+                    <a href="mailto:aryankapta33@gmail.com" class="cq-item">
+                        <div class="cq-circle">&#9993;&#65039;</div>
+                        <div class="cq-text">
+                            <span class="cq-label">Email</span>
+                            <span class="cq-value">aryankapta33@gmail.com</span>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Your Email</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </a>
+                    <a href="tel:+918894138882" class="cq-item">
+                        <div class="cq-circle">&#128222;</div>
+                        <div class="cq-text">
+                            <span class="cq-label">Phone</span>
+                            <span class="cq-value">+91 8894138882</span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Event Booking / Job Opportunity / Other">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Tell me about your event, venue, or opportunity..." required></textarea>
-                    </div>
-                    <button type="submit" class="form-submit" id="submitBtn">
-                        <span id="btnText">&#9993;&#65039; Send Message</span>
-                    </button>
-                    <div class="form-status" id="formStatus"></div>
-                </form>
+                    </a>
+                    <a href="https://www.linkedin.com/in/aryan-kapta-763942383/" target="_blank" class="cq-item">
+                        <div class="cq-circle">&#128101;</div>
+                        <div class="cq-text">
+                            <span class="cq-label">LinkedIn</span>
+                            <span class="cq-value">Aryan Kapta</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
